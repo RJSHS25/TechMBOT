@@ -1,0 +1,5 @@
+Project,Category,SubCategory,Topic,Description,Attributes,Specifications,Images,PCIR,Freshdesk
+Maps,Linear,Boundary,Boundary Attributes,Defines boundary attributes for linear features,"Length, Width, Direction","Must follow GIS spec v2.1","images/boundary1.png,images/boundary2.png",PCIR001,FD001
+Maps,Linear,Line,Line Mapping,Explains how line mapping works,"Start Point, End Point","Accuracy < 2m","images/line1.png",PCIR002,FD002
+Maps,Polygon,Area,Polygon Mapping,Defines polygon mapping rules,"Area, Shape","Closed geometry required","images/polygon1.png,images/polygon2.png",PCIR003,FD003
+Maps,Signals,Traffic,Signal Rules,Traffic signal rules,"Signal Type, Timing","Must sync with control system","images/signal1.png",PCIR004,FD004
