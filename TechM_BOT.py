@@ -29,6 +29,51 @@ with nav2:
     )
 
 # ===============================
+# 🔍 FUZZY SEARCH (SMART SEARCH)
+# ===============================
+from fuzzywuzzy import fuzz
+
+if search_input:
+    matches = []
+
+    for _, row in df.iterrows():
+        text = f"{row['Topic']} {row['Description']}"
+        score = fuzz.partial_ratio(search_input.lower(), text.lower())
+        matches.append((row, score))
+
+    # Sort top 5 matches
+    top_matches = sorted(matches, key=lambda x: x[1], reverse=True)[:5]
+
+    # Keep only good matches
+    options = [
+        f"{m[0]['Category']} → {m[0]['Topic']}"
+        for m in top_matches if m[1] > 50
+    ]
+
+    if options:
+        selected_option = st.selectbox(
+            "Results",
+            options,
+            key="top_search"
+        )
+
+        # Extract topic back
+        selected_topic = selected_option.split("→")[1].strip()
+
+        selected_row = df[df["Topic"] == selected_topic].iloc[0]
+        category = selected_row["Category"]
+
+        if st.button("Open", key="open_result"):
+            if category == "Linear":
+                st.switch_page("pages/1_Linear.py")
+            elif category == "Polygon":
+                st.switch_page("pages/2_Polygon.py")
+            elif category == "Signals":
+                st.switch_page("pages/3_Signals.py")
+    else:
+        st.caption("No close matches found")
+
+# ===============================
 # 🔍 SEARCH LOGIC (COMPACT)
 # ===============================
 if search_input:
