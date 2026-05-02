@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from fuzzywuzzy import fuzz
 
 # 📄 Load data
 @st.cache_data
@@ -9,85 +8,67 @@ def load_data():
 
 df = load_data()
 
-# 🧠 Title
-st.title("🗺️ Maps Knowledge Explorer")
+st.set_page_config(layout="wide")
 
 # ===============================
-# 🔍 SEARCH (your existing logic improved)
+# 🧭 LEFT NAVIGATION PANEL
 # ===============================
-st.subheader("🔍 Search")
+with st.sidebar:
+    st.title("🧭 Navigation")
 
-user_input = st.text_input("Ask anything (e.g. boundary, polygon rules...)")
+    project = st.selectbox("Project", df["Project"].unique())
 
-matched_row = None
+    category = st.selectbox(
+        "Category",
+        df[df["Project"] == project]["Category"].unique()
+    )
 
-if user_input:
-    matches = []
-    for _, row in df.iterrows():
-        text = f"{row['Topic']} {row['Description']}"
-        score = fuzz.partial_ratio(user_input.lower(), text.lower())
-        matches.append((row, score))
+    subcategory = st.selectbox(
+        "SubCategory",
+        df[
+            (df["Project"] == project) &
+            (df["Category"] == category)
+        ]["SubCategory"].unique()
+    )
 
-    best_match = sorted(matches, key=lambda x: x[1], reverse=True)[0]
-
-    if best_match[1] > 50:
-        matched_row = best_match[0]
-    else:
-        st.warning("No strong match found. Try navigation below.")
-
-# ===============================
-# 🧭 NAVIGATION (NEW FEATURE)
-# ===============================
-st.subheader("🧭 Browse Knowledge")
-
-project = st.selectbox("Project", df["Project"].unique())
-
-category = st.selectbox(
-    "Category",
-    df[df["Project"] == project]["Category"].unique()
-)
-
-subcategory = st.selectbox(
-    "SubCategory",
-    df[
+    topic_df = df[
         (df["Project"] == project) &
-        (df["Category"] == category)
-    ]["SubCategory"].unique()
-)
+        (df["Category"] == category) &
+        (df["SubCategory"] == subcategory)
+    ]
 
-topic_df = df[
-    (df["Project"] == project) &
-    (df["Category"] == category) &
-    (df["SubCategory"] == subcategory)
-]
-
-topic = st.selectbox("Topic", topic_df["Topic"].unique())
-
-if not matched_row:
-    matched_row = topic_df[topic_df["Topic"] == topic].iloc[0]
+    topic = st.selectbox("Topic", topic_df["Topic"].unique())
 
 # ===============================
-# 📄 DISPLAY SECTION
+# 📄 GET SELECTED ROW
 # ===============================
-if matched_row is not None:
-    st.markdown("---")
+selected_row = topic_df[topic_df["Topic"] == topic].iloc[0]
 
-    st.success(f"### 📌 {matched_row['Topic']}")
+# ===============================
+# 🖥️ MAIN 3 COLUMN LAYOUT
+# ===============================
+left_space, center, right = st.columns([1, 3, 1])
 
-    st.markdown(f"**📝 Description:** {matched_row['Description']}")
+# ===============================
+# 🎯 CENTER CONTENT
+# ===============================
+with center:
+    st.title(f"📌 {selected_row['Topic']}")
+
+    st.markdown(f"**📝 Description:** {selected_row['Description']}")
 
     col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("### 📊 Attributes")
-        st.markdown(matched_row.get("Attributes", ""))
+        st.markdown(selected_row.get("Attributes", ""))
 
     with col2:
         st.markdown("### ⚙️ Specifications")
-        st.markdown(matched_row.get("Specifications", ""))
+        st.markdown(selected_row.get("Specifications", ""))
 
     # 🖼️ Images
-    images = str(matched_row.get("Images", "")).split(",")
+    images = str(selected_row.get("Images", "")).split(",")
 
     if images and images[0]:
         st.markdown("### 🖼️ Reference Images")
@@ -97,10 +78,16 @@ if matched_row is not None:
             except:
                 st.warning(f"Image not found: {img}")
 
-    # 📌 PCIR
-    if matched_row.get("PCIR"):
-        st.info(f"📌 PCIR: {matched_row['PCIR']}")
+# ===============================
+# 📌 RIGHT PANEL (PCIR + Freshdesk)
+# ===============================
+with right:
+    st.markdown("## 📌 Details")
 
-    # 🛠️ Freshdesk
-    if matched_row.get("Freshdesk"):
-        st.info(f"🛠️ Freshdesk: {matched_row['Freshdesk']}")
+    pcir = selected_row.get("PCIR", "")
+    if pcir:
+        st.success(f"📌 PCIR\n\n{pcir}")
+
+    freshdesk = selected_row.get("Freshdesk", "")
+    if freshdesk:
+        st.info(f"🛠️ Freshdesk\n\n{freshdesk}")
