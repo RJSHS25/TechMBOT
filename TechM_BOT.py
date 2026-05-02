@@ -13,7 +13,7 @@ def load_data():
 df = load_data()
 
 # ===============================
-# 🔍 SEARCH FIRST (FIXED)
+# 🔍 SEARCH (LIVE SUGGESTIONS)
 # ===============================
 st.sidebar.markdown("## 🔍 Search")
 search_input = st.sidebar.text_input("Search topic...")
@@ -21,19 +21,25 @@ search_input = st.sidebar.text_input("Search topic...")
 search_result = None
 
 if search_input:
-    scores = []
+    matches = []
+
     for _, row in df.iterrows():
         text = f"{row['Topic']} {row['Description']}"
         score = fuzz.partial_ratio(search_input.lower(), text.lower())
-        scores.append((row, score))
+        matches.append((row, score))
 
-    best_match = sorted(scores, key=lambda x: x[1], reverse=True)[0]
+    top_matches = sorted(matches, key=lambda x: x[1], reverse=True)[:5]
 
-    if best_match[1] > 50:
-        search_result = best_match[0]
+    options = [m[0]["Topic"] for m in top_matches if m[1] > 40]
+
+    if options:
+        selected_option = st.sidebar.radio("Suggestions:", options)
+        search_result = df[df["Topic"] == selected_option].iloc[0]
+    else:
+        st.sidebar.caption("No close matches yet...")
 
 # ===============================
-# 🧭 NAVIGATION
+# 🧭 SIDEBAR NAVIGATION
 # ===============================
 with st.sidebar:
     st.title("🧭 Navigation")
@@ -62,20 +68,50 @@ with st.sidebar:
     topic = st.selectbox("Topic", topic_df["Topic"].unique())
 
 # ===============================
-# 📄 SELECT ROW
+# 🌳 DECISION TREE
+# ===============================
+st.markdown("## 🌳 Guided Decision Tree")
+
+category_choice = st.radio(
+    "What are you working on?",
+    df["Category"].unique()
+)
+
+sub_df = df[df["Category"] == category_choice]
+
+subcategory_choice = st.radio(
+    "Select sub type",
+    sub_df["SubCategory"].unique()
+)
+
+topic_df_tree = sub_df[sub_df["SubCategory"] == subcategory_choice]
+
+topic_choice_tree = st.radio(
+    "What do you want to know?",
+    topic_df_tree["Topic"].unique()
+)
+
+tree_selected_row = topic_df_tree[
+    topic_df_tree["Topic"] == topic_choice_tree
+].iloc[0]
+
+# ===============================
+# 📄 FINAL SELECTION LOGIC
 # ===============================
 if search_result is not None:
     selected_row = search_result
+elif tree_selected_row is not None:
+    selected_row = tree_selected_row
 else:
     selected_row = topic_df[topic_df["Topic"] == topic].iloc[0]
 
 # ===============================
-# 🖥️ LAYOUT FIXED
+# 🖥️ LAYOUT
 # ===============================
 center, right = st.columns([4, 1])
 
 # ===============================
-# 🎯 CENTER
+# 🎯 CENTER CONTENT
 # ===============================
 with center:
     st.title(f"📌 {selected_row['Topic']}")
@@ -91,16 +127,33 @@ with center:
         st.markdown("### ⚙️ Specifications")
         st.markdown(selected_row.get("Specifications", ""))
 
+    # 🖼️ IMAGE GRID WITH BOXES
     images = str(selected_row.get("Images", "")).split(",")
 
     if images and images[0]:
         st.markdown("### 🖼️ Reference Images")
-        for img in images:
+
+        cols = st.columns(3)
+
+        for i, img in enumerate(images):
             img_path = os.path.join(os.getcwd(), img.strip())
+
             if os.path.exists(img_path):
-                st.image(img_path, use_container_width=True)
+                with cols[i % 3]:
+                    st.markdown(f"""
+                    <div style="
+                        border:1px solid #ddd;
+                        padding:10px;
+                        border-radius:8px;
+                        text-align:center;
+                    ">
+                    """, unsafe_allow_html=True)
+
+                    st.image(img_path, use_container_width=True)
+
+                    st.markdown(f"<small>{img}</small></div>", unsafe_allow_html=True)
             else:
-                st.error(f"❌ Image not found: {img_path}")
+                st.error(f"❌ Not found: {img}")
 
 # ===============================
 # 📌 RIGHT PANEL
@@ -115,7 +168,7 @@ with right:
         st.info(f"🛠️ Freshdesk\n\n{selected_row['Freshdesk']}")
 
 # ===============================
-# 📊 ANALYTICS FIXED
+# 📊 ANALYTICS (FIXED)
 # ===============================
 if "last_topic" not in st.session_state:
     st.session_state.last_topic = None
@@ -146,7 +199,9 @@ if os.path.exists("usage_logs.csv"):
     col1, col2 = st.columns(2)
 
     with col1:
+        st.markdown("### 🔥 Most Viewed Topics")
         st.dataframe(logs["Topic"].value_counts().head(5))
 
     with col2:
+        st.markdown("### 👤 Usage by User")
         st.dataframe(logs["User"].value_counts())
