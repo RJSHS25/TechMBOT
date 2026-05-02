@@ -15,29 +15,47 @@ df = load_data()
 # ===============================
 # 🔍 SEARCH (LIVE SUGGESTIONS)
 # ===============================
-st.sidebar.markdown("## 🔍 Search")
-search_input = st.sidebar.text_input("Search topic...")
+with st.sidebar:
+    st.title("🧭 Navigation")
 
-search_result = None
+    # 🔍 Search first
+    st.markdown("## 🔍 Search")
+    search_input = st.text_input("Search topic...")
 
-if search_input:
-    matches = []
+    search_result = None
 
-    for _, row in df.iterrows():
-        text = f"{row['Topic']} {row['Description']}"
-        score = fuzz.partial_ratio(search_input.lower(), text.lower())
-        matches.append((row, score))
+    if search_input:
+        filtered = df[df["Topic"].str.contains(search_input, case=False, na=False)]
 
-    top_matches = sorted(matches, key=lambda x: x[1], reverse=True)[:5]
+        if not filtered.empty:
+            topic = st.selectbox("Suggestions", filtered["Topic"].unique())
+            search_result = filtered[filtered["Topic"] == topic].iloc[0]
 
-    options = [m[0]["Topic"] for m in top_matches if m[1] > 40]
+    st.markdown("---")
 
-    if options:
-        selected_option = st.sidebar.radio("Suggestions:", options)
-        search_result = df[df["Topic"] == selected_option].iloc[0]
-    else:
-        st.sidebar.caption("No close matches yet...")
+    # 🧭 Structured navigation
+    project = st.selectbox("Project", df["Project"].unique())
 
+    category = st.selectbox(
+        "Category",
+        df[df["Project"] == project]["Category"].unique()
+    )
+
+    subcategory = st.selectbox(
+        "SubCategory",
+        df[
+            (df["Project"] == project) &
+            (df["Category"] == category)
+        ]["SubCategory"].unique()
+    )
+
+    topic_list = df[
+        (df["Project"] == project) &
+        (df["Category"] == category) &
+        (df["SubCategory"] == subcategory)
+    ]["Topic"].unique()
+
+    topic = st.selectbox("Topic", topic_list)
 # ===============================
 # 🧭 SIDEBAR NAVIGATION
 # ===============================
