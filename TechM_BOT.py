@@ -42,12 +42,15 @@ with st.sidebar:
 # ===============================
 # 📄 GET SELECTED ROW
 # ===============================
-selected_row = topic_df[topic_df["Topic"] == topic].iloc[0]
+if search_result is not None:
+    selected_row = search_result
+else:
+    selected_row = topic_df[topic_df["Topic"] == topic].iloc[0]
 
 # ===============================
 # 🖥️ MAIN 3 COLUMN LAYOUT
 # ===============================
-left_space, center, right = st.columns([1, 3, 1])
+left_space, center, right = st.columns([4, 1])
 
 # ===============================
 # 🎯 CENTER CONTENT
@@ -91,3 +94,70 @@ with right:
     freshdesk = selected_row.get("Freshdesk", "")
     if freshdesk:
         st.info(f"🛠️ Freshdesk\n\n{freshdesk}")
+
+
+
+# ===============================
+# 📌 Search
+# ===============================
+
+
+from fuzzywuzzy import fuzz
+
+st.sidebar.markdown("## 🔍 Search")
+
+search_input = st.sidebar.text_input("Search topic...")
+
+search_result = None
+
+if search_input:
+    scores = []
+
+    for _, row in df.iterrows():
+        text = f"{row['Topic']} {row['Description']}"
+        score = fuzz.partial_ratio(search_input.lower(), text.lower())
+        scores.append((row, score))
+
+    best_match = sorted(scores, key=lambda x: x[1], reverse=True)[0]
+
+    if best_match[1] > 50:
+        search_result = best_match[0]
+
+
+# ===============================
+# 📌 Analytics
+# ===============================
+from datetime import datetime
+import os
+
+log_entry = {
+    "User": "demo_user",  # replace with login later
+    "Topic": selected_row["Topic"],
+    "Category": selected_row["Category"],
+    "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+}
+
+log_file = "usage_logs.csv"
+
+pd.DataFrame([log_entry]).to_csv(
+    log_file,
+    mode='a',
+    header=not os.path.exists(log_file),
+    index=False
+)
+
+st.markdown("---")
+st.markdown("## 📊 Analytics")
+
+if os.path.exists("usage_logs.csv"):
+    logs = pd.read_csv("usage_logs.csv")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("### 🔥 Most Viewed Topics")
+        st.dataframe(logs["Topic"].value_counts().head(5))
+
+    with col2:
+        st.markdown("### 👤 Usage by User")
+        st.dataframe(logs["User"].value_counts())
