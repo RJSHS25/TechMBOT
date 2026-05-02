@@ -12,15 +12,16 @@ def load_data():
 
 df = load_data()
 
+
 # ===============================
 # 🔍 SEARCH (LIVE SUGGESTIONS)
 # ===============================
 with st.sidebar:
     st.title("🧭 Navigation")
 
-    # 🔍 Search first
+    # 🔍 Search
     st.markdown("## 🔍 Search")
-    search_input = st.text_input("Search topic...")
+    search_input = st.text_input("Search topic...", key="search_input")
 
     search_result = None
 
@@ -28,17 +29,26 @@ with st.sidebar:
         filtered = df[df["Topic"].str.contains(search_input, case=False, na=False)]
 
         if not filtered.empty:
-            topic = st.selectbox("Suggestions", filtered["Topic"].unique())
-            search_result = filtered[filtered["Topic"] == topic].iloc[0]
+            topic_search = st.selectbox(
+                "Suggestions",
+                filtered["Topic"].unique(),
+                key="search_suggestions"
+            )
+            search_result = filtered[filtered["Topic"] == topic_search].iloc[0]
 
     st.markdown("---")
 
-    # 🧭 Structured navigation
-    project = st.selectbox("Project", df["Project"].unique())
+    # 🧭 Navigation
+    project = st.selectbox(
+        "Project",
+        df["Project"].unique(),
+        key="project_select"
+    )
 
     category = st.selectbox(
         "Category",
-        df[df["Project"] == project]["Category"].unique()
+        df[df["Project"] == project]["Category"].unique(),
+        key="category_select"
     )
 
     subcategory = st.selectbox(
@@ -46,7 +56,8 @@ with st.sidebar:
         df[
             (df["Project"] == project) &
             (df["Category"] == category)
-        ]["SubCategory"].unique()
+        ]["SubCategory"].unique(),
+        key="subcategory_select"
     )
 
     topic_list = df[
@@ -55,7 +66,12 @@ with st.sidebar:
         (df["SubCategory"] == subcategory)
     ]["Topic"].unique()
 
-    topic = st.selectbox("Topic", topic_list)
+    topic = st.selectbox(
+        "Topic",
+        topic_list,
+        key="topic_select"
+    )
+
 # ===============================
 # 🧭 SIDEBAR NAVIGATION
 # ===============================
