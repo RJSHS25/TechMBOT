@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from fuzzywuzzy import fuzz
 from datetime import datetime
 import os
 
@@ -12,9 +11,8 @@ def load_data():
 
 df = load_data()
 
-
 # ===============================
-# 🔍 SEARCH (LIVE SUGGESTIONS)
+# 🧭 SIDEBAR (SEARCH + NAVIGATION)
 # ===============================
 with st.sidebar:
     st.title("🧭 Navigation")
@@ -38,7 +36,7 @@ with st.sidebar:
 
     st.markdown("---")
 
-    # 🧭 Navigation
+    # 🧭 Navigation (ONLY ONE BLOCK)
     project = st.selectbox(
         "Project",
         df["Project"].unique(),
@@ -73,71 +71,18 @@ with st.sidebar:
     )
 
 # ===============================
-# 🧭 SIDEBAR NAVIGATION
+# 📄 FINAL SELECTION
 # ===============================
-with st.sidebar:
-    st.title("🧭 Navigation")
-
-    project = st.selectbox("Project", df["Project"].unique())
-
-    category = st.selectbox(
-        "Category",
-        df[df["Project"] == project]["Category"].unique()
-    )
-
-    subcategory = st.selectbox(
-        "SubCategory",
-        df[
-            (df["Project"] == project) &
-            (df["Category"] == category)
-        ]["SubCategory"].unique()
-    )
-
-    topic_df = df[
+if search_result is not None:
+    selected_row = search_result
+else:
+    filtered_df = df[
         (df["Project"] == project) &
         (df["Category"] == category) &
         (df["SubCategory"] == subcategory)
     ]
 
-    topic = st.selectbox("Topic", topic_df["Topic"].unique())
-
-# ===============================
-# 🌳 DECISION TREE
-# ===============================
-st.markdown("## 🌳 Guided Decision Tree")
-
-category_choice = st.radio(
-    "What are you working on?",
-    df["Category"].unique()
-)
-
-sub_df = df[df["Category"] == category_choice]
-
-subcategory_choice = st.radio(
-    "Select sub type",
-    sub_df["SubCategory"].unique()
-)
-
-topic_df_tree = sub_df[sub_df["SubCategory"] == subcategory_choice]
-
-topic_choice_tree = st.radio(
-    "What do you want to know?",
-    topic_df_tree["Topic"].unique()
-)
-
-tree_selected_row = topic_df_tree[
-    topic_df_tree["Topic"] == topic_choice_tree
-].iloc[0]
-
-# ===============================
-# 📄 FINAL SELECTION LOGIC
-# ===============================
-if search_result is not None:
-    selected_row = search_result
-elif tree_selected_row is not None:
-    selected_row = tree_selected_row
-else:
-    selected_row = topic_df[topic_df["Topic"] == topic].iloc[0]
+    selected_row = filtered_df[filtered_df["Topic"] == topic].iloc[0]
 
 # ===============================
 # 🖥️ LAYOUT
@@ -161,7 +106,7 @@ with center:
         st.markdown("### ⚙️ Specifications")
         st.markdown(selected_row.get("Specifications", ""))
 
-    # 🖼️ IMAGE GRID WITH BOXES
+    # 🖼️ Image Grid (boxed)
     images = str(selected_row.get("Images", "")).split(",")
 
     if images and images[0]:
@@ -174,7 +119,7 @@ with center:
 
             if os.path.exists(img_path):
                 with cols[i % 3]:
-                    st.markdown(f"""
+                    st.markdown("""
                     <div style="
                         border:1px solid #ddd;
                         padding:10px;
@@ -202,7 +147,7 @@ with right:
         st.info(f"🛠️ Freshdesk\n\n{selected_row['Freshdesk']}")
 
 # ===============================
-# 📊 ANALYTICS (FIXED)
+# 📊 ANALYTICS
 # ===============================
 if "last_topic" not in st.session_state:
     st.session_state.last_topic = None
