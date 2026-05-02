@@ -9,8 +9,10 @@ st.title("🗺️ Maps Knowledge Portal")
 
 st.markdown("### Learn, Navigate, and Explore Mapping Concepts")
 
-st.video("https://www.youtube.com/watch?v=hA_-MkU0Nfw")
+col1, col2, col3 = st.columns([1, 2, 1])
 
+with col2:
+    st.video("https://www.youtube.com/watch?v=hA_-MkU0Nfw")
 st.markdown("---")
 
 # ===============================
@@ -22,7 +24,7 @@ col1, col2, col3 = st.columns(3)
 
 # 🛣️ LINEAR
 with col1:
-    st.image("images/linear.png", use_container_width=True)
+    st.image("Images/linear.png", use_container_width=True)
     st.markdown("### 🛣️ Linear (Lanes)")
     st.markdown("Explore line mapping, boundaries, and attributes")
 
@@ -31,7 +33,7 @@ with col1:
 
 # 🔷 POLYGON
 with col2:
-    st.image("images/polygon.png", use_container_width=True)
+    st.image("Images/polygon.png", use_container_width=True)
     st.markdown("### 🔷 Polygon")
     st.markdown("Understand area mapping and geometry rules")
 
@@ -40,7 +42,7 @@ with col2:
 
 # 🚦 SIGNALS
 with col3:
-    st.image("images/signals.png", use_container_width=True)
+    st.image("Images/signals.png", use_container_width=True)
     st.markdown("### 🚦 Signals")
     st.markdown("Traffic signals, logic, and configurations")
 
