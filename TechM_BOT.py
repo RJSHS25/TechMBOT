@@ -1,159 +1,141 @@
 import streamlit as st
 import pandas as pd
 import os
-
-st.set_page_config(layout="wide")
+from fuzzywuzzy import fuzz
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # ===============================
-# 📄 LOAD DATA
+# ⚙️ CONFIG & SESSION STATE
+# ===============================
+st.set_page_config(layout="wide", page_title="TechM Maps Portal")
+
+if 'authenticated' not in st.session_state:
+    st.session_state.authenticated = False
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "assistant", "content": "Hi! I'm GuruCool. How can I help you today?"}]
+
+# ===============================
+# 🎨 FLOATING CHAT CSS
+# ===============================
+# This CSS anchors the popover to the bottom-right corner
+st.markdown("""
+    <style>
+    .stPopover {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    .stPopover > button {
+        border-radius: 50px !important;
+        width: 80px !important;
+        height: 80px !important;
+        background-color: #007bff !important;
+        color: white !important;
+        border: none !important;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.2) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# ===============================
+# 🔐 AUTHENTICATION
+# ===============================
+if not st.session_state.authenticated:
+    st.title("🔐 Login")
+    email = st.text_input("Email")
+    if st.button("Login"):
+        st.session_state.authenticated = True
+        st.rerun()
+    st.stop()
+
+# ===============================
+# 📄 DATA & NLP ENGINE
 # ===============================
 @st.cache_data
-def load_data():
-    return pd.read_csv("knowledge_base.csv")
+def load_and_prep_data():
+    # Load knowledge_base.csv
+    df = pd.read_csv("knowledge_base.csv")
+    df['profile'] = df['Topic'].fillna('') + " " + df['Description'].fillna('')
+    return df
 
-df = load_data()
+df_kb = load_and_prep_data()
 
-# ===============================
-# 🧭 TOP NAV BAR
-# ===============================
-nav1, nav2 = st.columns([3, 2])
-
-with nav1:
-    st.markdown("## 🗺️ Maps Knowledge Portal")
-
-with nav2:
-    search_input = st.text_input(
-        "🔍 Search",
-        placeholder="Search topics...",
-        label_visibility="collapsed"
-    )
-
-# ===============================
-# 🔍 FUZZY SEARCH (SMART SEARCH)
-# ===============================
-from fuzzywuzzy import fuzz
-
-if search_input:
-    matches = []
-
-    for _, row in df.iterrows():
-        text = f"{row['Topic']} {row['Description']}"
-        score = fuzz.partial_ratio(search_input.lower(), text.lower())
-        matches.append((row, score))
-
-    # Sort top 5 matches
-    top_matches = sorted(matches, key=lambda x: x[1], reverse=True)[:5]
-
-    # Keep only good matches
-    options = [
-        f"{m[0]['Category']} → {m[0]['Topic']}"
-        for m in top_matches if m[1] > 50
-    ]
-
-    if options:
-        selected_option = st.selectbox(
-            "Results",
-            options,
-            key="top_search"
-        )
-
-        # Extract topic back
-        selected_topic = selected_option.split("→")[1].strip()
-
-        selected_row = df[df["Topic"] == selected_topic].iloc[0]
-        category = selected_row["Category"]
-
-        if st.button("Open", key="open_result"):
-            if category == "Linear":
-                st.switch_page("pages/1_Linear.py")
-            elif category == "Polygon":
-                st.switch_page("pages/2_Polygon.py")
-            elif category == "Signals":
-                st.switch_page("pages/3_Signals.py")
-    else:
-        st.caption("No close matches found")
+def get_best_match_nlp(query, dataframe):
+    vectorizer = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = vectorizer.fit_transform(dataframe['profile'])
+    query_vec = vectorizer.transform([query])
+    cosine_sim = cosine_similarity(query_vec, tfidf_matrix).flatten()
+    
+    best_idx = cosine_sim.argsort()[-1]
+    highest_score = cosine_sim[best_idx]
+    
+    # Fallback to Fuzzy Logic
+    if highest_score < 0.2:
+        fuzzy_scores = dataframe['profile'].apply(lambda x: fuzz.partial_ratio(query.lower(), str(x).lower()))
+        best_idx = fuzzy_scores.idxmax()
+        highest_score = fuzzy_scores.max() / 100
+    
+    return dataframe.iloc[best_idx], highest_score
 
 # ===============================
-# 🔍 SEARCH LOGIC (COMPACT)
+# 🤖 THE FLOATING CHATBOT (Bottom-Right)
 # ===============================
-if search_input:
-    filtered = df[df["Topic"].str.contains(search_input, case=False, na=False)]
+with st.container():
+    # This popover acts as the "Chat Icon"
+    with st.popover("💬"):
+        st.subheader("🪐 GuruCool Chatbot")
+        
+        # Chat container for history
+        chat_container = st.container(height=350)
+        with chat_container:
+            for msg in st.session_state.messages:
+                with st.chat_message(msg["role"]):
+                    st.markdown(msg["content"])
 
-    if not filtered.empty:
-        selected_topic = st.selectbox(
-            "Results",
-            filtered["Topic"].unique(),
-            key="top_search"
-        )
-
-        selected_row = filtered[filtered["Topic"] == selected_topic].iloc[0]
-
-        category = selected_row["Category"]
-
-        if st.button("Open", key="open_result"):
-            if category == "Linear":
-                st.switch_page("pages/1_Linear.py")
-            elif category == "Polygon":
-                st.switch_page("pages/2_Polygon.py")
-            elif category == "Signals":
-                st.switch_page("pages/3_Signals.py")
-
-    else:
-        st.caption("No matches found")
+        # Input field
+        if prompt := st.chat_input("Ask GuruCool..."):
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            
+            # NLP Matching
+            result, score = get_best_match_nlp(prompt, df_kb)
+            
+            if score > 0.25:
+                bot_response = f"I found something on **{result['Topic']}**.\n\n{result['Description']}"
+                # Add action button logic
+                nav_target = result['Category']
+            else:
+                bot_response = "I couldn't find an exact match. Can you try more specific keywords?"
+                nav_target = None
+                
+            st.session_state.messages.append({"role": "assistant", "content": bot_response})
+            st.rerun()
 
 # ===============================
-# 🎥 VIDEO (CENTERED SMALL)
+# 🧭 MAIN DASHBOARD CONTENT
 # ===============================
+st.markdown("## 🗺️ Maps Knowledge Portal")
 st.markdown("---")
 
 col1, col2, col3 = st.columns([1, 2, 1])
-
 with col2:
     st.video("https://www.youtube.com/watch?v=hA_-MkU0Nfw")
 
-# ===============================
-# 🧭 DOMAIN CARDS
-# ===============================
 st.markdown("---")
-st.markdown("## 🚀 Choose Your Domain")
+st.markdown("### 🚀 Choose Your Domain")
 
-col1, col2, col3 = st.columns(3)
+d1, d2, d3 = st.columns(3)
+domain_data = [
+    {"name": "Linear", "col": d1, "img": "images/linear.png", "path": "pages/1_Linear.py"},
+    {"name": "Polygon", "col": d2, "img": "images/polygon.png", "path": "pages/2_Polygon.py"},
+    {"name": "Signals", "col": d3, "img": "images/signals.png", "path": "pages/3_Signals.py"}
+]
 
-# 🛣️ LINEAR
-with col1:
-    img = os.path.join(os.getcwd(), "images/linear.png")
-
-    if os.path.exists(img):
-        st.image(img, use_container_width=True)
-
-    st.markdown("### 🛣️ Linear")
-    st.caption("Line mapping, boundaries, attributes")
-
-    if st.button("Open Linear", key="linear_btn"):
-        st.switch_page("pages/1_Linear.py")
-
-# 🔷 POLYGON
-with col2:
-    img = os.path.join(os.getcwd(), "images/polygon.png")
-
-    if os.path.exists(img):
-        st.image(img, use_container_width=True)
-
-    st.markdown("### 🔷 Polygon")
-    st.caption("Area mapping and geometry")
-
-    if st.button("Open Polygon", key="polygon_btn"):
-        st.switch_page("pages/2_Polygon.py")
-
-# 🚦 SIGNALS
-with col3:
-    img = os.path.join(os.getcwd(), "images/signals.png")
-
-    if os.path.exists(img):
-        st.image(img, use_container_width=True)
-
-    st.markdown("### 🚦 Signals")
-    st.caption("Traffic signal configurations")
-
-    if st.button("Open Signals", key="signals_btn"):
-        st.switch_page("pages/3_Signals.py")
+for dom in domain_data:
+    with dom["col"]:
+        if os.path.exists(dom["img"]):
+            st.image(dom["img"], use_container_width=True)
+        st.subheader(dom["name"])
+        if st.button(f"Open {dom['name']}", key=dom['name']):
+            st.switch_page(dom["path"])
