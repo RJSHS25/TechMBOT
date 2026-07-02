@@ -1,151 +1,151 @@
-Sno,Material Code,Material Description ,GL Account,Valuation Class
-1,2002670,Laptop,60090141,2028
-2,2002671,AMC,60090142,2029
-3,2002672,Pen,60090143,2030
-4,2002673,Pencil,60090144,2031
-5,2002674,Headset,60090145,2032
-6,2002675,Adapter,60090146,2033
-7,2002676,Cable,60090147,2034
-8,2002677,Server,60090148,2035
-9,2002678,Notebook,60090149,2036
-10,2002679,Router,60090150,2037
-11,2002680,Mouse,60090151,2038
-12,2002681,Adapter,60090152,2039
-13,2002682,Cable,60090153,2040
-14,2002683,Headset,60090154,2041
-15,2002684,USB Drive,60090155,2042
-16,2002685,Headset,60090156,2043
-17,2002686,Printer,60090157,2044
-18,2002687,USB Drive,60090158,2045
-19,2002688,Marker,60090159,2046
-20,2002689,Scanner,60090160,2047
-21,2002690,Cable,60090161,2048
-22,2002691,Router,60090162,2049
-23,2002692,USB Drive,60090163,2050
-24,2002693,Desk,60090164,2051
-25,2002694,Notebook,60090165,2052
-26,2002695,Scanner,60090166,2053
-27,2002696,Chair,60090167,2054
-28,2002697,Scanner,60090168,2055
-29,2002698,Notebook,60090169,2056
-30,2002699,USB Drive,60090170,2057
-31,2002700,Server,60090171,2058
-32,2002701,Desk,60090172,2059
-33,2002702,Adapter,60090173,2060
-34,2002703,Chair,60090174,2061
-35,2002704,Scanner,60090175,2062
-36,2002705,Server,60090176,2063
-37,2002706,Router,60090177,2064
-38,2002707,Notebook,60090178,2065
-39,2002708,Server,60090179,2066
-40,2002709,Mouse,60090180,2067
-41,2002710,Keyboard,60090181,2068
-42,2002711,Mouse,60090182,2069
-43,2002712,Notebook,60090183,2070
-44,2002713,Headset,60090184,2071
-45,2002714,Notebook,60090185,2072
-46,2002715,Mouse,60090186,2073
-47,2002716,Mouse,60090187,2074
-48,2002717,Monitor,60090188,2075
-49,2002718,Scanner,60090189,2076
-50,2002719,Headset,60090190,2077
-51,2002720,Keyboard,60090191,2078
-52,2002721,Server,60090192,2079
-53,2002722,Chair,60090193,2080
-54,2002723,Mouse,60090194,2081
-55,2002724,USB Drive,60090195,2082
-56,2002725,Headset,60090196,2083
-57,2002726,Mouse,60090197,2084
-58,2002727,Monitor,60090198,2085
-59,2002728,Adapter,60090199,2086
-60,2002729,Mouse,60090200,2087
-61,2002730,Cable,60090201,2088
-62,2002731,Cable,60090202,2089
-63,2002732,USB Drive,60090203,2090
-64,2002733,USB Drive,60090204,2091
-65,2002734,Desk,60090205,2092
-66,2002735,Server,60090206,2093
-67,2002736,USB Drive,60090207,2094
-68,2002737,Headset,60090208,2095
-69,2002738,Scanner,60090209,2096
-70,2002739,Server,60090210,2097
-71,2002740,Headset,60090211,2098
-72,2002741,Desk,60090212,2099
-73,2002742,Scanner,60090213,2100
-74,2002743,Chair,60090214,2101
-75,2002744,Desk,60090215,2102
-76,2002745,Notebook,60090216,2103
-77,2002746,Scanner,60090217,2104
-78,2002747,Server,60090218,2105
-79,2002748,Printer,60090219,2106
-80,2002749,Keyboard,60090220,2107
-81,2002750,Server,60090221,2108
-82,2002751,Headset,60090222,2109
-83,2002752,USB Drive,60090223,2110
-84,2002753,Desk,60090224,2111
-85,2002754,USB Drive,60090225,2112
-86,2002755,Notebook,60090226,2113
-87,2002756,Router,60090227,2114
-88,2002757,Notebook,60090228,2115
-89,2002758,Router,60090229,2116
-90,2002759,Cable,60090230,2117
-91,2002760,Mouse,60090231,2118
-92,2002761,Mouse,60090232,2119
-93,2002762,Mouse,60090233,2120
-94,2002763,Notebook,60090234,2121
-95,2002764,Monitor,60090235,2122
-96,2002765,Printer,60090236,2123
-97,2002766,Headset,60090237,2124
-98,2002767,Mouse,60090238,2125
-99,2002768,Keyboard,60090239,2126
-100,2002769,Notebook,60090240,2127
-101,2002770,USB Drive,60090241,2128
-102,2002771,Keyboard,60090242,2129
-103,2002772,USB Drive,60090243,2130
-104,2002773,Keyboard,60090244,2131
-105,2002774,Adapter,60090245,2132
-106,2002775,Headset,60090246,2133
-107,2002776,Notebook,60090247,2134
-108,2002777,Chair,60090248,2135
-109,2002778,Desk,60090249,2136
-110,2002779,Keyboard,60090250,2137
-111,2002780,Marker,60090251,2138
-112,2002781,USB Drive,60090252,2139
-113,2002782,Server,60090253,2140
-114,2002783,Desk,60090254,2141
-115,2002784,Mouse,60090255,2142
-116,2002785,Marker,60090256,2143
-117,2002786,Mouse,60090257,2144
-118,2002787,Chair,60090258,2145
-119,2002788,Desk,60090259,2146
-120,2002789,Marker,60090260,2147
-121,2002790,Adapter,60090261,2148
-122,2002791,USB Drive,60090262,2149
-123,2002792,Marker,60090263,2150
-124,2002793,USB Drive,60090264,2151
-125,2002794,Printer,60090265,2152
-126,2002795,Desk,60090266,2153
-127,2002796,Printer,60090267,2154
-128,2002797,Server,60090268,2155
-129,2002798,Scanner,60090269,2156
-130,2002799,Desk,60090270,2157
-131,2002800,Headset,60090271,2158
-132,2002801,Desk,60090272,2159
-133,2002802,Desk,60090273,2160
-134,2002803,Adapter,60090274,2161
-135,2002804,Adapter,60090275,2162
-136,2002805,Keyboard,60090276,2163
-137,2002806,Adapter,60090277,2164
-138,2002807,Keyboard,60090278,2165
-139,2002808,USB Drive,60090279,2166
-140,2002809,Printer,60090280,2167
-141,2002810,Headset,60090281,2168
-142,2002811,Adapter,60090282,2169
-143,2002812,Desk,60090283,2170
-144,2002813,Mouse,60090284,2171
-145,2002814,Adapter,60090285,2172
-146,2002815,Printer,60090286,2173
-147,2002816,Cable,60090287,2174
-148,2002817,Server,60090288,2175
-149,2002818,Keyboard,60090289,2176
-150,2002819,Keyboard,60090290,2177
+Sno,Material Code,Material Description ,GL Account,Valuation Class,Description
+1,2002670,Laptop,60090141,2028,Business laptop used for office productivity and enterprise applications.
+2,2002671,AMC,60090142,2029,Annual maintenance contract for equipment or systems.
+3,2002672,Pen,60090143,2030,Blue ink ball pen for office writing.
+4,2002673,Pencil,60090144,2031,HB pencil for writing and sketching.
+5,2002674,Headset,60090145,2032,USB headset for calls and virtual meetings.
+6,2002675,Adapter,60090146,2033,Adapter used in daily business operations and procurement.
+7,2002676,Cable,60090147,2034,Cable used in daily business operations and procurement.
+8,2002677,Server,60090148,2035,Server used in daily business operations and procurement.
+9,2002678,Notebook,60090149,2036,Notebook used in daily business operations and procurement.
+10,2002679,Router,60090150,2037,Router used in daily business operations and procurement.
+11,2002680,Mouse,60090151,2038,Mouse used in daily business operations and procurement.
+12,2002681,Adapter,60090152,2039,Adapter used in daily business operations and procurement.
+13,2002682,Cable,60090153,2040,Cable used in daily business operations and procurement.
+14,2002683,Headset,60090154,2041,USB headset for calls and virtual meetings.
+15,2002684,USB Drive,60090155,2042,USB Drive used in daily business operations and procurement.
+16,2002685,Headset,60090156,2043,USB headset for calls and virtual meetings.
+17,2002686,Printer,60090157,2044,Printer used in daily business operations and procurement.
+18,2002687,USB Drive,60090158,2045,USB Drive used in daily business operations and procurement.
+19,2002688,Marker,60090159,2046,Marker used in daily business operations and procurement.
+20,2002689,Scanner,60090160,2047,Scanner used in daily business operations and procurement.
+21,2002690,Cable,60090161,2048,Cable used in daily business operations and procurement.
+22,2002691,Router,60090162,2049,Router used in daily business operations and procurement.
+23,2002692,USB Drive,60090163,2050,USB Drive used in daily business operations and procurement.
+24,2002693,Desk,60090164,2051,Desk used in daily business operations and procurement.
+25,2002694,Notebook,60090165,2052,Notebook used in daily business operations and procurement.
+26,2002695,Scanner,60090166,2053,Scanner used in daily business operations and procurement.
+27,2002696,Chair,60090167,2054,Chair used in daily business operations and procurement.
+28,2002697,Scanner,60090168,2055,Scanner used in daily business operations and procurement.
+29,2002698,Notebook,60090169,2056,Notebook used in daily business operations and procurement.
+30,2002699,USB Drive,60090170,2057,USB Drive used in daily business operations and procurement.
+31,2002700,Server,60090171,2058,Server used in daily business operations and procurement.
+32,2002701,Desk,60090172,2059,Desk used in daily business operations and procurement.
+33,2002702,Adapter,60090173,2060,Adapter used in daily business operations and procurement.
+34,2002703,Chair,60090174,2061,Chair used in daily business operations and procurement.
+35,2002704,Scanner,60090175,2062,Scanner used in daily business operations and procurement.
+36,2002705,Server,60090176,2063,Server used in daily business operations and procurement.
+37,2002706,Router,60090177,2064,Router used in daily business operations and procurement.
+38,2002707,Notebook,60090178,2065,Notebook used in daily business operations and procurement.
+39,2002708,Server,60090179,2066,Server used in daily business operations and procurement.
+40,2002709,Mouse,60090180,2067,Mouse used in daily business operations and procurement.
+41,2002710,Keyboard,60090181,2068,Keyboard used in daily business operations and procurement.
+42,2002711,Mouse,60090182,2069,Mouse used in daily business operations and procurement.
+43,2002712,Notebook,60090183,2070,Notebook used in daily business operations and procurement.
+44,2002713,Headset,60090184,2071,USB headset for calls and virtual meetings.
+45,2002714,Notebook,60090185,2072,Notebook used in daily business operations and procurement.
+46,2002715,Mouse,60090186,2073,Mouse used in daily business operations and procurement.
+47,2002716,Mouse,60090187,2074,Mouse used in daily business operations and procurement.
+48,2002717,Monitor,60090188,2075,Monitor used in daily business operations and procurement.
+49,2002718,Scanner,60090189,2076,Scanner used in daily business operations and procurement.
+50,2002719,Headset,60090190,2077,USB headset for calls and virtual meetings.
+51,2002720,Keyboard,60090191,2078,Keyboard used in daily business operations and procurement.
+52,2002721,Server,60090192,2079,Server used in daily business operations and procurement.
+53,2002722,Chair,60090193,2080,Chair used in daily business operations and procurement.
+54,2002723,Mouse,60090194,2081,Mouse used in daily business operations and procurement.
+55,2002724,USB Drive,60090195,2082,USB Drive used in daily business operations and procurement.
+56,2002725,Headset,60090196,2083,USB headset for calls and virtual meetings.
+57,2002726,Mouse,60090197,2084,Mouse used in daily business operations and procurement.
+58,2002727,Monitor,60090198,2085,Monitor used in daily business operations and procurement.
+59,2002728,Adapter,60090199,2086,Adapter used in daily business operations and procurement.
+60,2002729,Mouse,60090200,2087,Mouse used in daily business operations and procurement.
+61,2002730,Cable,60090201,2088,Cable used in daily business operations and procurement.
+62,2002731,Cable,60090202,2089,Cable used in daily business operations and procurement.
+63,2002732,USB Drive,60090203,2090,USB Drive used in daily business operations and procurement.
+64,2002733,USB Drive,60090204,2091,USB Drive used in daily business operations and procurement.
+65,2002734,Desk,60090205,2092,Desk used in daily business operations and procurement.
+66,2002735,Server,60090206,2093,Server used in daily business operations and procurement.
+67,2002736,USB Drive,60090207,2094,USB Drive used in daily business operations and procurement.
+68,2002737,Headset,60090208,2095,USB headset for calls and virtual meetings.
+69,2002738,Scanner,60090209,2096,Scanner used in daily business operations and procurement.
+70,2002739,Server,60090210,2097,Server used in daily business operations and procurement.
+71,2002740,Headset,60090211,2098,USB headset for calls and virtual meetings.
+72,2002741,Desk,60090212,2099,Desk used in daily business operations and procurement.
+73,2002742,Scanner,60090213,2100,Scanner used in daily business operations and procurement.
+74,2002743,Chair,60090214,2101,Chair used in daily business operations and procurement.
+75,2002744,Desk,60090215,2102,Desk used in daily business operations and procurement.
+76,2002745,Notebook,60090216,2103,Notebook used in daily business operations and procurement.
+77,2002746,Scanner,60090217,2104,Scanner used in daily business operations and procurement.
+78,2002747,Server,60090218,2105,Server used in daily business operations and procurement.
+79,2002748,Printer,60090219,2106,Printer used in daily business operations and procurement.
+80,2002749,Keyboard,60090220,2107,Keyboard used in daily business operations and procurement.
+81,2002750,Server,60090221,2108,Server used in daily business operations and procurement.
+82,2002751,Headset,60090222,2109,USB headset for calls and virtual meetings.
+83,2002752,USB Drive,60090223,2110,USB Drive used in daily business operations and procurement.
+84,2002753,Desk,60090224,2111,Desk used in daily business operations and procurement.
+85,2002754,USB Drive,60090225,2112,USB Drive used in daily business operations and procurement.
+86,2002755,Notebook,60090226,2113,Notebook used in daily business operations and procurement.
+87,2002756,Router,60090227,2114,Router used in daily business operations and procurement.
+88,2002757,Notebook,60090228,2115,Notebook used in daily business operations and procurement.
+89,2002758,Router,60090229,2116,Router used in daily business operations and procurement.
+90,2002759,Cable,60090230,2117,Cable used in daily business operations and procurement.
+91,2002760,Mouse,60090231,2118,Mouse used in daily business operations and procurement.
+92,2002761,Mouse,60090232,2119,Mouse used in daily business operations and procurement.
+93,2002762,Mouse,60090233,2120,Mouse used in daily business operations and procurement.
+94,2002763,Notebook,60090234,2121,Notebook used in daily business operations and procurement.
+95,2002764,Monitor,60090235,2122,Monitor used in daily business operations and procurement.
+96,2002765,Printer,60090236,2123,Printer used in daily business operations and procurement.
+97,2002766,Headset,60090237,2124,USB headset for calls and virtual meetings.
+98,2002767,Mouse,60090238,2125,Mouse used in daily business operations and procurement.
+99,2002768,Keyboard,60090239,2126,Keyboard used in daily business operations and procurement.
+100,2002769,Notebook,60090240,2127,Notebook used in daily business operations and procurement.
+101,2002770,USB Drive,60090241,2128,USB Drive used in daily business operations and procurement.
+102,2002771,Keyboard,60090242,2129,Keyboard used in daily business operations and procurement.
+103,2002772,USB Drive,60090243,2130,USB Drive used in daily business operations and procurement.
+104,2002773,Keyboard,60090244,2131,Keyboard used in daily business operations and procurement.
+105,2002774,Adapter,60090245,2132,Adapter used in daily business operations and procurement.
+106,2002775,Headset,60090246,2133,USB headset for calls and virtual meetings.
+107,2002776,Notebook,60090247,2134,Notebook used in daily business operations and procurement.
+108,2002777,Chair,60090248,2135,Chair used in daily business operations and procurement.
+109,2002778,Desk,60090249,2136,Desk used in daily business operations and procurement.
+110,2002779,Keyboard,60090250,2137,Keyboard used in daily business operations and procurement.
+111,2002780,Marker,60090251,2138,Marker used in daily business operations and procurement.
+112,2002781,USB Drive,60090252,2139,USB Drive used in daily business operations and procurement.
+113,2002782,Server,60090253,2140,Server used in daily business operations and procurement.
+114,2002783,Desk,60090254,2141,Desk used in daily business operations and procurement.
+115,2002784,Mouse,60090255,2142,Mouse used in daily business operations and procurement.
+116,2002785,Marker,60090256,2143,Marker used in daily business operations and procurement.
+117,2002786,Mouse,60090257,2144,Mouse used in daily business operations and procurement.
+118,2002787,Chair,60090258,2145,Chair used in daily business operations and procurement.
+119,2002788,Desk,60090259,2146,Desk used in daily business operations and procurement.
+120,2002789,Marker,60090260,2147,Marker used in daily business operations and procurement.
+121,2002790,Adapter,60090261,2148,Adapter used in daily business operations and procurement.
+122,2002791,USB Drive,60090262,2149,USB Drive used in daily business operations and procurement.
+123,2002792,Marker,60090263,2150,Marker used in daily business operations and procurement.
+124,2002793,USB Drive,60090264,2151,USB Drive used in daily business operations and procurement.
+125,2002794,Printer,60090265,2152,Printer used in daily business operations and procurement.
+126,2002795,Desk,60090266,2153,Desk used in daily business operations and procurement.
+127,2002796,Printer,60090267,2154,Printer used in daily business operations and procurement.
+128,2002797,Server,60090268,2155,Server used in daily business operations and procurement.
+129,2002798,Scanner,60090269,2156,Scanner used in daily business operations and procurement.
+130,2002799,Desk,60090270,2157,Desk used in daily business operations and procurement.
+131,2002800,Headset,60090271,2158,USB headset for calls and virtual meetings.
+132,2002801,Desk,60090272,2159,Desk used in daily business operations and procurement.
+133,2002802,Desk,60090273,2160,Desk used in daily business operations and procurement.
+134,2002803,Adapter,60090274,2161,Adapter used in daily business operations and procurement.
+135,2002804,Adapter,60090275,2162,Adapter used in daily business operations and procurement.
+136,2002805,Keyboard,60090276,2163,Keyboard used in daily business operations and procurement.
+137,2002806,Adapter,60090277,2164,Adapter used in daily business operations and procurement.
+138,2002807,Keyboard,60090278,2165,Keyboard used in daily business operations and procurement.
+139,2002808,USB Drive,60090279,2166,USB Drive used in daily business operations and procurement.
+140,2002809,Printer,60090280,2167,Printer used in daily business operations and procurement.
+141,2002810,Headset,60090281,2168,USB headset for calls and virtual meetings.
+142,2002811,Adapter,60090282,2169,Adapter used in daily business operations and procurement.
+143,2002812,Desk,60090283,2170,Desk used in daily business operations and procurement.
+144,2002813,Mouse,60090284,2171,Mouse used in daily business operations and procurement.
+145,2002814,Adapter,60090285,2172,Adapter used in daily business operations and procurement.
+146,2002815,Printer,60090286,2173,Printer used in daily business operations and procurement.
+147,2002816,Cable,60090287,2174,Cable used in daily business operations and procurement.
+148,2002817,Server,60090288,2175,Server used in daily business operations and procurement.
+149,2002818,Keyboard,60090289,2176,Keyboard used in daily business operations and procurement.
+150,2002819,Keyboard,60090290,2177,Keyboard used in daily business operations and procurement.
