@@ -12,6 +12,7 @@ def render_po_search(title, csv_file, page_name):
 
     df = pd.read_csv(csv_file, sep=None, engine="python")
     df.columns = df.columns.str.strip()
+    st.write("Columns found:", df.columns.tolist())
 
     required_columns = [
         "PO#",
