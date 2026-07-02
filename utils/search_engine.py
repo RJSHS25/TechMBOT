@@ -13,6 +13,24 @@ def render_search_page(title, csv_file, page_name):
 
     df = pd.read_csv(csv_file)
 
+    # Remove extra spaces from column names
+    df.columns = df.columns.str.strip()
+
+    required_columns = [
+        "Material Code",
+        "Material Description",
+        "GL Account",
+        "Valuation Class"
+    ]
+
+    missing_columns = [col for col in required_columns if col not in df.columns]
+
+    if missing_columns:
+        st.error(f"Missing columns in CSV: {missing_columns}")
+        st.write("Available columns are:")
+        st.write(list(df.columns))
+        return
+
     search_text = st.text_input("Search Material Description")
 
     if search_text:
@@ -25,17 +43,7 @@ def render_search_page(title, csv_file, page_name):
 
         if not exact_match.empty:
             st.success("Exact match found")
-            st.dataframe(
-                exact_match[
-                    [
-                        "Material Code",
-                        "Material Description",
-                        "GL Account",
-                        "Valuation Class"
-                    ]
-                ],
-                use_container_width=True
-            )
+            st.dataframe(exact_match[required_columns], use_container_width=True)
 
         else:
             nearest_matches = get_close_matches(
@@ -57,17 +65,7 @@ def render_search_page(title, csv_file, page_name):
                     df["Material Description"] == selected_material
                 ]
 
-                st.dataframe(
-                    selected_row[
-                        [
-                            "Material Code",
-                            "Material Description",
-                            "GL Account",
-                            "Valuation Class"
-                        ]
-                    ],
-                    use_container_width=True
-                )
+                st.dataframe(selected_row[required_columns], use_container_width=True)
             else:
                 st.error("No matching material found.")
     else:
