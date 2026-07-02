@@ -8,6 +8,6 @@ tab1, = st.tabs(["PO Search Engine"])
 with tab1:
     render_po_search(
         title="PO Search Engine",
-        csv_file="PO_Data.csv",
+        csv_file="PO_data.csv",
         page_name="PO Search"
     )
