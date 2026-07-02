@@ -11,7 +11,8 @@ def render_search_page(title, csv_file, page_name):
         st.error(f"{csv_file} not found")
         return
 
-    df = pd.read_csv(csv_file)
+    df = pd.read_csv(csv_file, sep=None, engine="python")
+    df.columns = df.columns.str.strip()
 
     search_text = st.text_input("Search Material Description")
 
