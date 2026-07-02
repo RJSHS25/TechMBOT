@@ -11,7 +11,7 @@ tab1, tab2 = st.tabs([
 with tab1:
     render_search_page(
         title="Material Master",
-        csv_file="Finance_data.csv",
+        csv_file="data.csv",
         page_name="Material Master"
     )
 
