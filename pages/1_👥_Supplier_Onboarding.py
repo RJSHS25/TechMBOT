@@ -3,7 +3,7 @@ import streamlit as st
 st.title("👥 Supplier Onboarding")
 
 tab1, tab2 = st.tabs([
-    "Supplier Onboarding Status",
+    "Supplier Onboarding",
     "Sample Guide for Questionnaire"
 ])
 
