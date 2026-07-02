@@ -8,7 +8,7 @@ tab1, tab2 = st.tabs([
 ])
 
 with tab1:
-    st.subheader("Supplier Onboarding Status")
+    st.subheader("Supplier Onboarding")
 
     modules = {
         "Module 1: Welcome": [
