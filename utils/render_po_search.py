@@ -10,9 +10,9 @@ def render_po_search(title, csv_file, page_name):
         st.error(f"{csv_file} not found.")
         return
 
+    df = pd.read_csv(csv_file, sep=None, engine="python")
     df.columns = df.columns.str.replace("\ufeff", "", regex=False).str.strip()
-    df.columns = df.columns.str.strip()
-    
+
     required_columns = [
         "PO#",
         "Month",
@@ -30,6 +30,7 @@ def render_po_search(title, csv_file, page_name):
 
     if missing_columns:
         st.error(f"Missing columns: {missing_columns}")
+        st.write("Columns found:", df.columns.tolist())
         return
 
     search_text = st.text_input("🔍 Search by PO Number or Invoice Number")
@@ -62,17 +63,10 @@ def render_po_search(title, csv_file, page_name):
 
     col1, col2, col3, col4 = st.columns(4)
 
-    with col1:
-        st.metric("PO Number", selected_row["PO#"])
-
-    with col2:
-        st.metric("PO Status", selected_row["PO Status"])
-
-    with col3:
-        st.metric("Invoice Status", selected_row["Invoice Status"])
-
-    with col4:
-        st.metric("Delivery Status", selected_row["Delivery Status"])
+    col1.metric("PO Number", selected_row["PO#"])
+    col2.metric("PO Status", selected_row["PO Status"])
+    col3.metric("Invoice Status", selected_row["Invoice Status"])
+    col4.metric("Delivery Status", selected_row["Delivery Status"])
 
     st.divider()
 
