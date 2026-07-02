@@ -1,13 +1,17 @@
 import streamlit as st
-from utils import render_search_page
+from utils.common import render_search_page
 
-st.title("🔎 PO Invoice Search")
+st.title("📦 Material Master")
 
-tab1, = st.tabs(["PO Search Engine"])
+tab1, tab2 = st.tabs(["Material Search Engine", "PR Creation in SAP"])
 
 with tab1:
     render_search_page(
-        title="PO Search Engine",
-        csv_file="PO_data.csv",
-        page_name="PO Search"
+        title="📦 Material Search Engine",
+        csv_file="Finance_data.csv",
+        page_name="Material Master"
     )
+
+with tab2:
+    st.subheader("PR Creation in SAP")
+    st.info("Add PR Creation in SAP steps/content here.")
