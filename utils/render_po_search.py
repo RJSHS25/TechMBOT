@@ -56,19 +56,10 @@ def render_po_search(title, csv_file, page_name):
         ]
 
     if result.empty:
-        st.warning("No matching Purchase Order or Invoice found.")
+        st.warning("No matching Purchase Order or Invoice found. Please verify the number and try again.")
         return
 
-    selected_row = result.iloc[0]
-
-    col1, col2, col3, col4 = st.columns(4)
-
-    col1.metric("PO Number", selected_row["PO#"])
-    col2.metric("PO Status", selected_row["PO Status"])
-    col3.metric("Invoice Status", selected_row["Invoice Status"])
-    col4.metric("Delivery Status", selected_row["Delivery Status"])
-
-    st.divider()
+    st.success(f"✅ {len(result)} record(s) found")
 
     st.dataframe(
         result[required_columns],
