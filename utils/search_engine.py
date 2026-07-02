@@ -1,29 +1,74 @@
 import streamlit as st
 import pandas as pd
 import os
+from difflib import get_close_matches
 
-def get_combined_matches(df, search_text):
-    # your matching logic here
-    return df
-
-def log_usage(page_name, search_text):
-    # your logging logic here
-    pass
 
 def render_search_page(title, csv_file, page_name):
     st.subheader(title)
 
-    if os.path.exists(csv_file):
-        df = pd.read_csv(csv_file)
-    else:
+    if not os.path.exists(csv_file):
         st.error(f"{csv_file} not found")
         return
 
-    search_text = st.text_input("Search")
+    df = pd.read_csv(csv_file)
+
+    search_text = st.text_input("Search Material Description")
 
     if search_text:
-        results = get_combined_matches(df, search_text)
-        log_usage(page_name, search_text)
-        st.dataframe(results, use_container_width=True)
+        descriptions = df["Material Description"].astype(str).tolist()
+
+        exact_match = df[
+            df["Material Description"].astype(str).str.lower()
+            == search_text.lower()
+        ]
+
+        if not exact_match.empty:
+            st.success("Exact match found")
+            st.dataframe(
+                exact_match[
+                    [
+                        "Material Code",
+                        "Material Description",
+                        "GL Account",
+                        "Valuation Class"
+                    ]
+                ],
+                use_container_width=True
+            )
+
+        else:
+            nearest_matches = get_close_matches(
+                search_text,
+                descriptions,
+                n=5,
+                cutoff=0.3
+            )
+
+            if nearest_matches:
+                st.warning("Exact match not found. Please select nearest match.")
+
+                selected_material = st.selectbox(
+                    "Select Material",
+                    nearest_matches
+                )
+
+                selected_row = df[
+                    df["Material Description"] == selected_material
+                ]
+
+                st.dataframe(
+                    selected_row[
+                        [
+                            "Material Code",
+                            "Material Description",
+                            "GL Account",
+                            "Valuation Class"
+                        ]
+                    ],
+                    use_container_width=True
+                )
+            else:
+                st.error("No matching material found.")
     else:
-        st.dataframe(df, use_container_width=True)
+        st.info("Enter material name to search.")
