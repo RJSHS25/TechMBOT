@@ -7,8 +7,8 @@
 1000063304,Jun,2023,Open,1239,6000,6000,0,Delivery Pending,Invoice not received,Awaiting for Goods
 1000063305,Jul,2024,Close,1240,7000,7000,0,Delivery Pending,Invoice not received,Awaiting for Goods
 1000063306,Aug,2025,Close,1241,8000,8000,0,Complete Delivery,Invoice Received,Goods Receipt
-1000063307,Sep,2026,Close,1242,9000,9000,0,Complete Delivery,Invoice not received,Goods Receipt
-1000063308,Oct,2026,Open,1243,10000,10000,0,Complete Delivery,Invoice Received,Goods Receipt
+1000063306,Sep,2026,Close,1242,9000,9000,0,Complete Delivery,Invoice not received,Goods Receipt
+1000063306,Oct,2026,Open,1243,10000,10000,0,Complete Delivery,Invoice Received,Goods Receipt
 1000063309,Nov,2026,Close,1244,11000,11000,0,Complete Delivery,Invoice not received,Goods Receipt
 1000063310,Dec,2026,Close,1245,12000,12000,0,Complete Delivery,Invoice not received,Goods Receipt
 1000063311,Jan,2026,Close,1246,13000,13000,0,Delivery Pending,Invoice Received,Awaiting for Goods
