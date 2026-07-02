@@ -1,0 +1,25 @@
+﻿PO#,Month,Year,PO Status,Invoice #,PO Value# ,Invoice Amount,PO Limit,Delivery Status,Invoice Status,PO Status
+1000063299,Jan,2018,Open,1234,1000,1000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063300,Feb,2019,Open,1235,2000,2000,0,PO Approval In-Progress,Invoice Received,PO Approval
+1000063301,Mar,2020,Open,1236,3000,3000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063302,Apr,2021,Close,1237,4000,4000,0,PO Issued to Supplier,Invoice Received,PO Status
+1000063303,May,2022,Open,1238,5000,5000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063304,Jun,2023,Open,1239,6000,6000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063305,Jul,2024,Close,1240,7000,7000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063306,Aug,2025,Close,1241,8000,8000,0,Complete Delivery,Invoice Received,Goods Receipt
+1000063307,Sep,2026,Close,1242,9000,9000,0,Complete Delivery,Invoice not received,Goods Receipt
+1000063308,Oct,2026,Open,1243,10000,10000,0,Complete Delivery,Invoice Received,Goods Receipt
+1000063309,Nov,2026,Close,1244,11000,11000,0,Complete Delivery,Invoice not received,Goods Receipt
+1000063310,Dec,2026,Close,1245,12000,12000,0,Complete Delivery,Invoice not received,Goods Receipt
+1000063311,Jan,2026,Close,1246,13000,13000,0,Delivery Pending,Invoice Received,Awaiting for Goods
+1000063312,Feb,2026,Close,1247,14000,14000,0,Complete Delivery,Invoice Received,Goods Receipt
+1000063313,Mar,2026,Close,1248,15000,15000,0,Complete Delivery,Invoice not received,Goods Receipt
+1000063314,Apr,2026,Open,1249,16000,16000,0,PO Work In-Progress,Invoice not received,PO Creation
+1000063315,May,2026,Close,1250,17000,17000,0,Complete Delivery,Invoice Received,Goods Receipt
+1000063316,Jun,2026,Close,1251,18000,18000,0,Complete Delivery,Invoice Received,Goods Receipt
+1000063317,Jul,2026,Open,1252,19000,19000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063318,Aug,2026,Open,1253,20000,20000,0,Delivery Pending,Invoice Received,Awaiting for Goods
+1000063319,Sep,2026,Open,1254,21000,21000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063320,Oct,2026,Open,1255,22000,22000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063321,Nov,2026,Open,1256,23000,23000,0,Delivery Pending,Invoice not received,Awaiting for Goods
+1000063322,Dec,2026,Close,1257,24000,24000,0,Delivery Pending,Invoice not received,Awaiting for Goods
