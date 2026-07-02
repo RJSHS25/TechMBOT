@@ -87,4 +87,4 @@ with tab1:
 
 with tab2:
     st.subheader("Sample Guide for Questionnaire")
-    st.info("Add questionnaire guide here.")
+    st.info("Still Under Construction!")
