@@ -25,19 +25,8 @@ def render_search_page(title, csv_file, page_name):
         ]
 
         if not exact_match.empty:
-            st.success("Exact match found")
-            st.dataframe(
-                exact_match[
-                    [
-                        "Material Code",
-                        "Material Description",
-                        "GL Account",
-                        "Valuation Class"
-                    ]
-                ],
-                use_container_width=True
-            )
-
+            st.dataframe(exact_match[required_columns], use_container_width=True)
+        
         else:
             nearest_matches = get_close_matches(
                 search_text,
@@ -45,6 +34,26 @@ def render_search_page(title, csv_file, page_name):
                 n=5,
                 cutoff=0.3
             )
+        
+            if nearest_matches:
+                st.info("We found similar materials. Please confirm the correct one.")
+        
+                selected_material = st.selectbox(
+                    "Is this what you are looking for?",
+                    nearest_matches
+                )
+        
+                selected_row = df[
+                    df["Material Description"] == selected_material
+                ]
+        
+                st.dataframe(selected_row[required_columns], use_container_width=True)
+        
+            else:
+                st.warning(
+                    "No close match found. Try searching with a shorter or different keyword, "
+                    "for example: Laptop, Pen, Printer, Cable."
+                )
 
             if nearest_matches:
                 st.warning("Exact match not found. Please select nearest match.")
