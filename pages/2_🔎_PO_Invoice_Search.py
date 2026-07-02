@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.search_engine import render_po_search
+from utils.render_po_search import render_po_search
 
 st.title("🔎 PO Invoice Search")
 
