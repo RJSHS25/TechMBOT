@@ -1,5 +1,4 @@
 import streamlit as st
-
 from utils.search_engine import render_search_page
 
 st.title("📦 Material Master")
